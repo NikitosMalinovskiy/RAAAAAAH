@@ -12,6 +12,11 @@ SCREEN_WIDTH = 1000
 size = (SCREEN_WIDTH, SCREEN_HEIGHT)
 screen = pygame.display.set_mode(size)
 
+def center_text (text, screen_width):
+
+    x_coord = (screen_width - text_width)/2
+    return x_coord
+
 Intro_Screen1 = "Welcome!"
 progress = "Click anywhere to progress"
 Intro_Screen2 = "This game has many levels"
@@ -28,30 +33,33 @@ progression = 0
 run = True
 
 while run:
-    my_font = pygame.font.SysFont('Arial', 15)
+    my_font = pygame.font.SysFont('Arial', 50)
     # INTRO
     Intro_Screen1_message = my_font.render(Intro_Screen1, True, (255, 255, 255))
-    Intro_Screen2_message = my_font.render(Intro_Screen1, True, (255, 255, 255))
-    Intro_Screen3_message = my_font.render(Intro_Screen1, True, (255, 255, 255))
-    Intro_Screen4_message = my_font.render(Intro_Screen1, True, (255, 255, 255))
-    Intro_Screen5_message = my_font.render(Intro_Screen1, True, (255, 255, 255))
-    Intro_Screen6_message = my_font.render(Intro_Screen1, True, (255, 255, 255))
-    Intro_Screen7_message = my_font.render(Intro_Screen1, True, (255, 255, 255))
-    Intro_Screen8_message = my_font.render(Intro_Screen1, True, (255, 255, 255))
-    Intro_Screen9_message = my_font.render(Intro_Screen1, True, (255, 255, 255))
+    Intro_Screen2_message = my_font.render(Intro_Screen2, True, (255, 255, 255))
+    Intro_Screen3_message = my_font.render(Intro_Screen3, True, (255, 255, 255))
+    Intro_Screen4_message = my_font.render(Intro_Screen4, True, (255, 255, 255))
+    Intro_Screen5_message = my_font.render(Intro_Screen5, True, (255, 255, 255))
+    Intro_Screen6_message = my_font.render(Intro_Screen6, True, (255, 255, 255))
+    Intro_Screen7_message = my_font.render(Intro_Screen7, True, (255, 255, 255))
+    Intro_Screen8_message = my_font.render(Intro_Screen8, True, (255, 255, 255))
+    Intro_Screen9_message = my_font.render(Intro_Screen9, True, (255, 255, 255))
+    Intro_list = [Intro_Screen1_message, Intro_Screen2_message, Intro_Screen3_message, Intro_Screen4_message, Intro_Screen5_message, Intro_Screen6_message, Intro_Screen7_message, Intro_Screen8_message, Intro_Screen9_message]
     # INTRO
     for event in pygame.event.get():  # User did something
         if event.type == pygame.QUIT:  # If user clicked close
             run = False
-        if progression < 7:
+        if progression < 6:
             if event.type == pygame.MOUSEBUTTONUP:
                 progression += 1
-                print(progression)
+                print(progression)  #DELETE LATER
+
 
     screen.fill((50, 40, 98))
-    if progression < 7:
-        for item in Intro:
-            screen.blit(item, (0, 0))
+    # INTRO BLITTING
+    if progression < 6:
+        for item in Intro_list:
+            screen.blit(Intro_Screen(progression)_message, (0, 0))
     pygame.display.update()
 
 
