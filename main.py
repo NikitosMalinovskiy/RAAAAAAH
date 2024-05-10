@@ -12,9 +12,9 @@ SCREEN_WIDTH = 1000
 size = (SCREEN_WIDTH, SCREEN_HEIGHT)
 screen = pygame.display.set_mode(size)
 
-def center_text (text, screen_width):
-
-    x_coord = (screen_width - text_width)/2
+def center_text (text):
+    text_width = text.get_width()
+    x_coord = (1000 - text_width)/2
     return x_coord
 
 Intro_Screen1 = "Welcome!"
@@ -58,8 +58,14 @@ while run:
     screen.fill((50, 40, 98))
     # INTRO BLITTING
     if progression < 6:
-        for item in Intro_list:
-            screen.blit(Intro_Screen(progression)_message, (0, 0))
+        Current_message = Intro_list[progression]
+        x = center_text(Intro_list[progression])
+        screen.blit(Current_message, (x, 350))
+        my_font = pygame.font.SysFont('Arial', 25)
+        progress_message = my_font.render(progress, True, (255, 255, 255))
+        x = center_text(progress_message)
+        screen.blit(progress_message, (x, 700))
+
     pygame.display.update()
 
 
