@@ -1,6 +1,7 @@
 import pygame
 import random
 import time
+from trick1 import Trick1
 
 pygame.init()
 pygame.font.init()
@@ -24,14 +25,16 @@ Intro_Screen3 = "With many different puzzles"
 Intro_Screen4 = "You will have to use your brain to solve these puzzles!"
 Intro_Screen5 = "You will have to think outside the box"
 Intro_Screen6 = "Now, you may start"
-Intro_Screen7 = "Click ANYWHERE"
+Intro_Screen7a = "Click"
+Intro_Screen7b =  "ANYWHERE"
 Intro_Screen8 = "See, you're getting it!"
 Intro_Screen9 = "Go ahead"
-Intro = [Intro_Screen1, Intro_Screen2, Intro_Screen3, Intro_Screen4, Intro_Screen5, Intro_Screen6, Intro_Screen7, Intro_Screen8, Intro_Screen9]
+Intro = [Intro_Screen1, Intro_Screen2, Intro_Screen3, Intro_Screen4, Intro_Screen5, Intro_Screen6, Intro_Screen7a, Intro_Screen7b, Intro_Screen8, Intro_Screen9]
 progression = 0
 
 run = True
 
+t = Trick1(100, 100)
 while run:
     my_font = pygame.font.SysFont('Arial', 50)
     # INTRO
@@ -41,10 +44,11 @@ while run:
     Intro_Screen4_message = my_font.render(Intro_Screen4, True, (255, 255, 255))
     Intro_Screen5_message = my_font.render(Intro_Screen5, True, (255, 255, 255))
     Intro_Screen6_message = my_font.render(Intro_Screen6, True, (255, 255, 255))
-    Intro_Screen7_message = my_font.render(Intro_Screen7, True, (255, 255, 255))
+    Intro_Screen7a_message = my_font.render(Intro_Screen7a, True, (255, 255, 255))
+    Intro_Screen7b_message = my_font.render(Intro_Screen7b, True, (255, 255, 255))
     Intro_Screen8_message = my_font.render(Intro_Screen8, True, (255, 255, 255))
     Intro_Screen9_message = my_font.render(Intro_Screen9, True, (255, 255, 255))
-    Intro_list = [Intro_Screen1_message, Intro_Screen2_message, Intro_Screen3_message, Intro_Screen4_message, Intro_Screen5_message, Intro_Screen6_message, Intro_Screen7_message, Intro_Screen8_message, Intro_Screen9_message]
+    Intro_list = [Intro_Screen1_message, Intro_Screen2_message, Intro_Screen3_message, Intro_Screen4_message, Intro_Screen5_message, Intro_Screen6_message, Intro_Screen7a_message, Intro_Screen7b_message, Intro_Screen8_message, Intro_Screen9_message]
     # INTRO
     for event in pygame.event.get():  # User did something
         if event.type == pygame.QUIT:  # If user clicked close
@@ -53,6 +57,11 @@ while run:
             if event.type == pygame.MOUSEBUTTONUP:
                 progression += 1
                 print(progression)  #DELETE LATER
+        if progression == 6:
+            pos = pygame.mouse.get_pos()
+            if t.rect.collidepoint(pos):
+                progression += 1
+
 
 
     screen.fill((50, 40, 98))
@@ -65,6 +74,13 @@ while run:
         progress_message = my_font.render(progress, True, (255, 255, 255))
         x = center_text(progress_message)
         screen.blit(progress_message, (x, 700))
+    if progression == 6:
+        Current_message1 = Intro_list[6]
+        x1 = center_text(Intro_list[6])
+        Current_message2 = Intro_list[7]
+        x2 = center_text(Intro_list[7])
+        screen.blit(Current_message1, (x1, 300))
+        screen.blit(Current_message2, (x2, 400))
 
     pygame.display.update()
 
