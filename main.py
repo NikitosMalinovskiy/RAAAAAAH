@@ -1,7 +1,6 @@
 import pygame
 import random
 import time
-from trick1 import Trick1
 
 pygame.init()
 pygame.font.init()
@@ -18,6 +17,14 @@ def center_text (text):
     x_coord = (1000 - text_width)/2
     return x_coord
 
+def find_textbox (text):
+    text_width = text.get_width()
+    text_height = text.get_height()
+    x_coord = (1000 - text_width)/2
+    y_coord = 400
+    rect = pygame.Rect(x_coord, y_coord, text_width, text_height)
+    return rect
+
 Intro_Screen1 = "Welcome!"
 progress = "Click anywhere to progress"
 Intro_Screen2 = "This game has many levels"
@@ -33,8 +40,7 @@ Intro = [Intro_Screen1, Intro_Screen2, Intro_Screen3, Intro_Screen4, Intro_Scree
 progression = 0
 
 run = True
-
-t = Trick1(100, 100)
+t = Intro_Screen7b
 while run:
     my_font = pygame.font.SysFont('Arial', 50)
     # INTRO
@@ -50,6 +56,10 @@ while run:
     Intro_Screen9_message = my_font.render(Intro_Screen9, True, (255, 255, 255))
     Intro_list = [Intro_Screen1_message, Intro_Screen2_message, Intro_Screen3_message, Intro_Screen4_message, Intro_Screen5_message, Intro_Screen6_message, Intro_Screen7a_message, Intro_Screen7b_message, Intro_Screen8_message, Intro_Screen9_message]
     # INTRO
+    b_height = Intro_Screen7b_message.get_height()
+    b_width = Intro_Screen7b_message.get_width()
+    b_rect = pygame.Rect(-100, -100, b_height, b_width)
+
     for event in pygame.event.get():  # User did something
         if event.type == pygame.QUIT:  # If user clicked close
             run = False
@@ -57,10 +67,8 @@ while run:
             if event.type == pygame.MOUSEBUTTONUP:
                 progression += 1
                 print(progression)  #DELETE LATER
-        if progression == 6:
-            pos = pygame.mouse.get_pos()
-            if t.rect.collidepoint(pos):
-                progression += 1
+        if event.type == pygame.MOUSEBUTTONUP and b_rect.collidepoint(event.pos):
+            print("Maybe??!?!")
 
 
 
@@ -74,6 +82,7 @@ while run:
         progress_message = my_font.render(progress, True, (255, 255, 255))
         x = center_text(progress_message)
         screen.blit(progress_message, (x, 700))
+
     if progression == 6:
         Current_message1 = Intro_list[6]
         x1 = center_text(Intro_list[6])
@@ -81,8 +90,11 @@ while run:
         x2 = center_text(Intro_list[7])
         screen.blit(Current_message1, (x1, 300))
         screen.blit(Current_message2, (x2, 400))
-
+        b_height = Intro_Screen7b_message.get_height()
+        b_width = Intro_Screen7b_message.get_width()
+        b_rect = pygame.Rect(x2, 400, b_height, b_width)
     pygame.display.update()
+
 
 
 pygame.quit()
