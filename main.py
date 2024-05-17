@@ -33,7 +33,7 @@ Intro_Screen4 = "You will have to use your brain to solve these puzzles!"
 Intro_Screen5 = "You will have to think outside the box"
 Intro_Screen6 = "Now, you may start"
 Intro_Screen7a = "Click"
-Intro_Screen7b =  "ANYWHERE"
+Intro_Screen7b = "ANYWHERE"
 Intro_Screen8 = "See, you're getting it!"
 Intro_Screen9 = "Go ahead"
 Intro = [Intro_Screen1, Intro_Screen2, Intro_Screen3, Intro_Screen4, Intro_Screen5, Intro_Screen6, Intro_Screen7a, Intro_Screen7b, Intro_Screen8, Intro_Screen9]
@@ -58,17 +58,20 @@ while run:
     # INTRO
     b_height = Intro_Screen7b_message.get_height()
     b_width = Intro_Screen7b_message.get_width()
-    b_rect = pygame.Rect(-100, -100, b_height, b_width)
+    b_rect = pygame.Rect(381, 400, b_width, b_height)
 
     for event in pygame.event.get():  # User did something
         if event.type == pygame.QUIT:  # If user clicked close
             run = False
-        if progression < 6:
+        if progression < 6 or (progression < 9 and progression > 6):
             if event.type == pygame.MOUSEBUTTONUP:
                 progression += 1
                 print(progression)  #DELETE LATER
-        if event.type == pygame.MOUSEBUTTONUP and b_rect.collidepoint(event.pos):
-            print("Maybe??!?!")
+        if progression == 6:
+            if event.type == pygame.MOUSEBUTTONUP and b_rect.collidepoint(event.pos):
+                progression += 1
+                print("Maybe??!?!")
+
 
 
 
@@ -90,9 +93,15 @@ while run:
         x2 = center_text(Intro_list[7])
         screen.blit(Current_message1, (x1, 300))
         screen.blit(Current_message2, (x2, 400))
-        b_height = Intro_Screen7b_message.get_height()
-        b_width = Intro_Screen7b_message.get_width()
-        b_rect = pygame.Rect(x2, 400, b_height, b_width)
+
+    if progression < 9 and progression > 6:
+        Current_message = Intro_list[progression + 1]
+        x = center_text(Intro_list[progression + 1])
+        screen.blit(Current_message, (x, 350))
+        my_font = pygame.font.SysFont('Arial', 25)
+        progress_message = my_font.render(progress, True, (255, 255, 255))
+        x = center_text(progress_message)
+        screen.blit(progress_message, (x, 700))
     pygame.display.update()
 
 
