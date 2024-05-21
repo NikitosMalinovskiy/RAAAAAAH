@@ -1,6 +1,7 @@
 import pygame
 import random
 import time
+from trick1 import Mouse
 
 pygame.init()
 pygame.font.init()
@@ -41,6 +42,7 @@ progression = 0
 
 run = True
 t = Intro_Screen7b
+m = Mouse(300, 200)
 while run:
     my_font = pygame.font.SysFont('Arial', 50)
     # INTRO
@@ -71,6 +73,11 @@ while run:
             if event.type == pygame.MOUSEBUTTONUP and b_rect.collidepoint(event.pos):
                 progression += 1
                 print("Maybe??!?!")
+        if progression == 9:
+            if m.rect.colliderect(event.pos):
+                collision = True
+                message = "Collision detected"
+                print(message)
 
 
 
@@ -103,6 +110,9 @@ while run:
         x = center_text(progress_message)
         screen.blit(progress_message, (x, 700))
     pygame.display.update()
+
+    if progression == 9:
+        screen.blit(m.image, m.rect)
 
 
 
