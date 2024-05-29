@@ -39,7 +39,7 @@ Intro_Screen8 = "See, you're getting it!"
 Intro_Screen9 = "Go ahead"
 Intro = [Intro_Screen1, Intro_Screen2, Intro_Screen3, Intro_Screen4, Intro_Screen5, Intro_Screen6, Intro_Screen7a, Intro_Screen7b, Intro_Screen8, Intro_Screen9]
 progression = 0
-
+collision = False
 run = True
 t = Intro_Screen7b
 m = Mouse(300, 200)
@@ -74,7 +74,7 @@ while run:
                 progression += 1
                 print("Maybe??!?!")
         if progression == 9:
-            if m.rect.colliderect(event.pos):
+            if m.rect.collidepoint(event.pos) and event.type == pygame.MOUSEBUTTONUP:
                 collision = True
                 message = "Collision detected"
                 print(message)
@@ -112,7 +112,9 @@ while run:
     pygame.display.update()
 
     if progression == 9:
+        screen.fill((50, 40, 98))
         screen.blit(m.image, m.rect)
+        pygame.display.update()
 
 
 
