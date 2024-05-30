@@ -38,6 +38,11 @@ Intro_Screen7b = "ANYWHERE"
 Intro_Screen8 = "See, you're getting it!"
 Intro_Screen9 = "Go ahead"
 Intro = [Intro_Screen1, Intro_Screen2, Intro_Screen3, Intro_Screen4, Intro_Screen5, Intro_Screen6, Intro_Screen7a, Intro_Screen7b, Intro_Screen8, Intro_Screen9]
+Level1_text1 = "Catch the Mouse!"
+level1_text2 = "You have to be faster than that!"
+level1_hint = "Hint: "
+level1_hintreveal = "What do mice like?"
+
 progression = 0
 collision = False
 run = True
@@ -65,19 +70,23 @@ while run:
     for event in pygame.event.get():  # User did something
         if event.type == pygame.QUIT:  # If user clicked close
             run = False
+        pos = pygame.mouse.get_pos()
         if progression < 6 or (progression < 9 and progression > 6):
             if event.type == pygame.MOUSEBUTTONUP:
                 progression += 1
                 print(progression)  #DELETE LATER
         if progression == 6:
-            if event.type == pygame.MOUSEBUTTONUP and b_rect.collidepoint(event.pos):
+            if event.type == pygame.MOUSEBUTTONUP and b_rect.collidepoint(pos):
                 progression += 1
                 print("Maybe??!?!")
         if progression == 9:
-            if m.rect.collidepoint(event.pos) and event.type == pygame.MOUSEBUTTONUP:
+            if m.rect.collidepoint(pos):
                 collision = True
                 message = "Collision detected"
                 print(message)
+                m.x = random.randint(0, 900)
+                m.y = random.randint(0, 700)
+                m.move(m.x, m.y)
 
 
 
@@ -109,12 +118,12 @@ while run:
         progress_message = my_font.render(progress, True, (255, 255, 255))
         x = center_text(progress_message)
         screen.blit(progress_message, (x, 700))
-    pygame.display.update()
 
     if progression == 9:
         screen.fill((50, 40, 98))
         screen.blit(m.image, m.rect)
-        pygame.display.update()
+
+    pygame.display.update()
 
 
 
