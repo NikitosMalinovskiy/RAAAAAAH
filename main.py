@@ -39,11 +39,17 @@ Intro_Screen8 = "See, you're getting it!"
 Intro_Screen9 = "Go ahead"
 Intro = [Intro_Screen1, Intro_Screen2, Intro_Screen3, Intro_Screen4, Intro_Screen5, Intro_Screen6, Intro_Screen7a, Intro_Screen7b, Intro_Screen8, Intro_Screen9]
 Level1_text1 = "Catch the Mouse!"
-level1_text2 = "You have to be faster than that!"
-level1_hint = "Hint: "
-level1_hintreveal = "What do mice like?"
-
+Level1_text2 = "You have to be faster than that!"
+Level1_hint = "Hint: What do mice like?"
+reveal1 = "C"
+reveal2 = "H"
+reveal3 = "E"
+reveal4 = "E"
+reveal5 = "S"
+reveal6 = "E"
+move_times = 0
 progression = 0
+reveal = 0
 collision = False
 run = True
 t = Intro_Screen7b
@@ -62,6 +68,10 @@ while run:
     Intro_Screen8_message = my_font.render(Intro_Screen8, True, (255, 255, 255))
     Intro_Screen9_message = my_font.render(Intro_Screen9, True, (255, 255, 255))
     Intro_list = [Intro_Screen1_message, Intro_Screen2_message, Intro_Screen3_message, Intro_Screen4_message, Intro_Screen5_message, Intro_Screen6_message, Intro_Screen7a_message, Intro_Screen7b_message, Intro_Screen8_message, Intro_Screen9_message]
+    Level1_text1_message = my_font.render(Level1_text1, True, (255, 255, 255))
+    Level1_text2_message = my_font.render(Level1_text2, True, (255, 255, 255))
+    Level1_hint_message = my_font.render(Level1_hint, True, (255, 255, 255))
+    #######                      REMEMBER TO BLIT THE REVEAL LETTERS                    ############
     # INTRO
     b_height = Intro_Screen7b_message.get_height()
     b_width = Intro_Screen7b_message.get_width()
@@ -83,10 +93,13 @@ while run:
             if m.rect.collidepoint(pos):
                 collision = True
                 message = "Collision detected"
+                move_times += 1
                 print(message)
                 m.x = random.randint(0, 900)
                 m.y = random.randint(0, 700)
                 m.move(m.x, m.y)
+
+
 
 
 
@@ -122,6 +135,19 @@ while run:
     if progression == 9:
         screen.fill((50, 40, 98))
         screen.blit(m.image, m.rect)
+        if move_times <= 10:
+            x = center_text(Level1_text1_message)
+            screen.blit(Level1_text1_message, (x, 20))
+        if move_times > 10 and move_times <= 20:
+            x = center_text(Level1_text2_message)
+            screen.blit(Level1_text2_message, (x, 20))
+        if move_times >20:
+            x = center_text(Level1_hint_message)
+            screen.blit(Level1_hint_message, (x, 20))
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_c]:
+            screen.blit()
+
 
     pygame.display.update()
 
