@@ -2,6 +2,7 @@ import pygame
 import random
 import time
 from trick1 import Mouse
+from cheese import Cheese
 
 pygame.init()
 pygame.font.init()
@@ -54,6 +55,14 @@ collision = False
 run = True
 t = Intro_Screen7b
 m = Mouse(300, 200)
+c = Cheese(300, 600)
+letter1 = False
+letter2 = False
+letter3 = False
+letter4 = False
+letter5 = False
+letter6 = False
+cheese = False
 while run:
     my_font = pygame.font.SysFont('Arial', 50)
     # INTRO
@@ -71,6 +80,12 @@ while run:
     Level1_text1_message = my_font.render(Level1_text1, True, (255, 255, 255))
     Level1_text2_message = my_font.render(Level1_text2, True, (255, 255, 255))
     Level1_hint_message = my_font.render(Level1_hint, True, (255, 255, 255))
+    reveal1_message = my_font.render(reveal1, True, (255, 255, 255))
+    reveal2_message = my_font.render(reveal2, True, (255, 255, 255))
+    reveal3_message = my_font.render(reveal3, True, (255, 255, 255))
+    reveal4_message = my_font.render(reveal4, True, (255, 255, 255))
+    reveal5_message = my_font.render(reveal5, True, (255, 255, 255))
+    reveal6_message = my_font.render(reveal6, True, (255, 255, 255))
     #######                      REMEMBER TO BLIT THE REVEAL LETTERS                    ############
     # INTRO
     b_height = Intro_Screen7b_message.get_height()
@@ -98,6 +113,34 @@ while run:
                 m.x = random.randint(0, 900)
                 m.y = random.randint(0, 700)
                 m.move(m.x, m.y)
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_c]:
+                letter1 = True
+            if letter1 == True:
+                if keys[pygame.K_h]:
+                    letter2 = True
+            if letter2 == True:
+                if keys[pygame.K_e]:
+                    letter3 = True
+            if letter3 == True:
+                if keys[pygame.K_e]:
+                    letter4 = True
+            if letter4 == True:
+                if keys[pygame.K_s]:
+                    letter5 = True
+            if letter5 == True:
+                if keys[pygame.K_e]:
+                    letter6 = True
+            if letter1 == True and letter2 == True and letter3 == True and letter4 == True and letter5 == True and letter6 == True:
+                letter1 = False
+                letter2 = False
+                letter3 = False
+                letter4 = False
+                letter5 = False
+                letter6 = False
+                cheese = True
+
+
 
 
 
@@ -145,8 +188,20 @@ while run:
             x = center_text(Level1_hint_message)
             screen.blit(Level1_hint_message, (x, 20))
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_c]:
-            screen.blit()
+        if letter1 == True:
+            screen.blit(reveal1_message, (150, 700))
+        if letter2 == True:
+            screen.blit(reveal2_message, (250, 700))
+        if letter3 == True:
+            screen.blit(reveal3_message, (350, 700))
+        if letter4 == True:
+            screen.blit(reveal4_message, (450, 700))
+        if letter5 == True:
+            screen.blit(reveal5_message, (550, 700))
+        if letter6 == True:
+            screen.blit(reveal6_message, (650, 700))
+        if cheese == True:
+            screen.blit(c.image, c.rect)
 
 
     pygame.display.update()
