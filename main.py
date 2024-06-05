@@ -42,12 +42,16 @@ Intro = [Intro_Screen1, Intro_Screen2, Intro_Screen3, Intro_Screen4, Intro_Scree
 Level1_text1 = "Catch the Mouse!"
 Level1_text2 = "You have to be faster than that!"
 Level1_hint = "Hint: What do mice like?"
+level1_hint2 = "Atleast show some excitement!"
 reveal1 = "C"
 reveal2 = "H"
 reveal3 = "E"
 reveal4 = "E"
 reveal5 = "S"
 reveal6 = "E"
+reveal7 = "!"
+reveal8 = "!"
+reveal9 = "!"
 move_times = 0
 progression = 0
 reveal = 0
@@ -62,6 +66,9 @@ letter3 = False
 letter4 = False
 letter5 = False
 letter6 = False
+letter7 = False
+letter8 = False
+letter9 = False
 cheese = False
 while run:
     my_font = pygame.font.SysFont('Arial', 50)
@@ -86,6 +93,10 @@ while run:
     reveal4_message = my_font.render(reveal4, True, (255, 255, 255))
     reveal5_message = my_font.render(reveal5, True, (255, 255, 255))
     reveal6_message = my_font.render(reveal6, True, (255, 255, 255))
+    reveal7_message = my_font.render(reveal7, True, (255, 255, 255))
+    reveal8_message = my_font.render(reveal8, True, (255, 255, 255))
+    reveal9_message = my_font.render(reveal9, True, (255, 255, 255))
+    Level1_hint2_message = my_font.render(level1_hint2, True, (255, 255, 255))
     #######                      REMEMBER TO BLIT THE REVEAL LETTERS                    ############
     # INTRO
     b_height = Intro_Screen7b_message.get_height()
@@ -131,7 +142,16 @@ while run:
             if letter5 == True:
                 if keys[pygame.K_e]:
                     letter6 = True
-            if letter1 == True and letter2 == True and letter3 == True and letter4 == True and letter5 == True and letter6 == True:
+            if letter6 == True:
+                if keys[pygame.K_EXCLAIM]:
+                    letter7 = True
+            if letter7 == True:
+                if keys[pygame.K_EXCLAIM]:
+                    letter8 = True
+                if letter8 == True:
+                    if keys[pygame.K_EXCLAIM]:
+                        letter9 = True
+            if letter1 == True and letter2 == True and letter3 == True and letter4 == True and letter5 == True and letter6 == True and letter7 == True and letter8 == True and letter9 == True:
                 letter1 = False
                 letter2 = False
                 letter3 = False
