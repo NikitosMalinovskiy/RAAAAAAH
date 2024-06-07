@@ -69,6 +69,7 @@ letter6 = False
 letter7 = False
 letter8 = False
 letter9 = False
+hintreveal = False
 cheese = False
 while run:
     my_font = pygame.font.SysFont('Arial', 50)
@@ -142,15 +143,16 @@ while run:
             if letter5 == True:
                 if keys[pygame.K_e]:
                     letter6 = True
+                    hintreveal = True
             if letter6 == True:
-                if keys[pygame.K_EXCLAIM]:
+                if keys[pygame.K_1]:
                     letter7 = True
             if letter7 == True:
-                if keys[pygame.K_EXCLAIM]:
+                if keys[pygame.K_1]:
                     letter8 = True
-                if letter8 == True:
-                    if keys[pygame.K_EXCLAIM]:
-                        letter9 = True
+            if letter8 == True:
+                if keys[pygame.K_1]:
+                    letter9 = True
             if letter1 == True and letter2 == True and letter3 == True and letter4 == True and letter5 == True and letter6 == True and letter7 == True and letter8 == True and letter9 == True:
                 letter1 = False
                 letter2 = False
@@ -158,13 +160,11 @@ while run:
                 letter4 = False
                 letter5 = False
                 letter6 = False
+                letter7 = False
+                letter8 = False
+                letter9 = False
+                hintreveal = False
                 cheese = True
-
-
-
-
-
-
 
 
     screen.fill((50, 40, 98))
@@ -220,6 +220,14 @@ while run:
             screen.blit(reveal5_message, (550, 700))
         if letter6 == True:
             screen.blit(reveal6_message, (650, 700))
+        if letter7 == True:
+            screen.blit(reveal7_message, (700, 700))
+        if letter8 == True:
+            screen.blit(reveal8_message, (750, 700))
+        if letter9 == True:
+            screen.blit(reveal9_message, (800, 700))
+        if hintreveal == True:
+            screen.blit(Level1_hint2_message, )
         if cheese == True:
             screen.blit(c.image, c.rect)
 
