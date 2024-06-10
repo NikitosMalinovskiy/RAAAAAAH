@@ -52,6 +52,7 @@ reveal6 = "E"
 reveal7 = "!"
 reveal8 = "!"
 reveal9 = "!"
+congrat = "Well Done!"
 move_times = 0
 progression = 0
 reveal = 0
@@ -71,6 +72,7 @@ letter8 = False
 letter9 = False
 hintreveal = False
 cheese = False
+trick = False
 while run:
     my_font = pygame.font.SysFont('Arial', 50)
     # INTRO
@@ -98,6 +100,7 @@ while run:
     reveal8_message = my_font.render(reveal8, True, (255, 255, 255))
     reveal9_message = my_font.render(reveal9, True, (255, 255, 255))
     Level1_hint2_message = my_font.render(level1_hint2, True, (255, 255, 255))
+    congrat_message = my_font.render(congrat, True, (255, 255, 255))
     #######                      REMEMBER TO BLIT THE REVEAL LETTERS                    ############
     # INTRO
     b_height = Intro_Screen7b_message.get_height()
@@ -167,6 +170,8 @@ while run:
                 cheese = True
 
 
+
+
     screen.fill((50, 40, 98))
     # INTRO BLITTING
     if progression < 6:
@@ -198,15 +203,18 @@ while run:
     if progression == 9:
         screen.fill((50, 40, 98))
         screen.blit(m.image, m.rect)
-        if move_times <= 10:
+        if move_times <= 10 and hintreveal == False and trick == False:
             x = center_text(Level1_text1_message)
             screen.blit(Level1_text1_message, (x, 20))
-        if move_times > 10 and move_times <= 20:
+        if move_times > 10 and move_times <= 20 and hintreveal == False and trick == False:
             x = center_text(Level1_text2_message)
             screen.blit(Level1_text2_message, (x, 20))
-        if move_times >20:
+        if move_times > 20 and hintreveal == False and trick == False:
             x = center_text(Level1_hint_message)
             screen.blit(Level1_hint_message, (x, 20))
+        if trick == True:
+            x = center_text(congrat_message)
+            screen.blit(congrat_message, (x, 20))
         keys = pygame.key.get_pressed()
         if letter1 == True:
             screen.blit(reveal1_message, (150, 700))
@@ -227,9 +235,12 @@ while run:
         if letter9 == True:
             screen.blit(reveal9_message, (800, 700))
         if hintreveal == True:
-            screen.blit(Level1_hint2_message, )
+            x = center_text(Level1_hint2_message)
+            screen.blit(Level1_hint2_message, (x, 20))
         if cheese == True:
             screen.blit(c.image, c.rect)
+            trick = True
+
 
 
     pygame.display.update()
