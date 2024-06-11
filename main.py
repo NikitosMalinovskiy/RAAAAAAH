@@ -115,11 +115,19 @@ while run:
             if event.type == pygame.MOUSEBUTTONUP:
                 progression += 1
                 print(progression)  #DELETE LATER
-        if progression == 6:
+        if progression == 6 and cheese == False:
             if event.type == pygame.MOUSEBUTTONUP and b_rect.collidepoint(pos):
                 progression += 1
                 print("Maybe??!?!")
-        if progression == 9:
+        if cheese == True:
+            if m.rect.collidepoint(pos):
+                collision = True
+                m.x = 480
+                m.y = 650
+                m.move(m.x, m.y)
+        if cheese == True and m.x == 480 and m.y == 650:
+
+        if progression == 9 and cheese == False:
             if m.rect.collidepoint(pos):
                 collision = True
                 message = "Collision detected"
