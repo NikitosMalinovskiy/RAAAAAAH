@@ -125,8 +125,6 @@ while run:
                 m.x = 480
                 m.y = 650
                 m.move(m.x, m.y)
-        if cheese == True and m.x == 480 and m.y == 650:
-
         if progression == 9 and cheese == False:
             if m.rect.collidepoint(pos):
                 collision = True
